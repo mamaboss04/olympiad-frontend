@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     // Делаем запрос к твоему серверу
-    this.http.get('https://olympiad-backend-cykq.onrender.com').subscribe({
+    this.http.get('https://olympiad-backend-cykq.onrender.com/api/teams').subscribe({
       next: (data: any) => {
         this.teams = data;
         console.log('Данные получены:', data);
