@@ -44,7 +44,7 @@ export class AppComponent {
       return;
     }
 
-    this.http.post('https://olympiad-backend-cykq.onrender.com', this.teamData)
+    this.http.post('https://olympiad-backend-cykq.onrender.com/api/register', this.teamData)
       .subscribe({
         next: () => {
           alert('Регистрация успешно завершена!');
