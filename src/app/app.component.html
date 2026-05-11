@@ -1,0 +1,89 @@
+<div *ngIf="!isAdminPage()">
+  <div class="main-wrapper">
+    <div class="registration-box">
+      <h2 class="form-title">Регистрация команды</h2>
+
+      <div class="field-group">
+        <label class="section-label">* Команда дает согласие на обработку персональных данных</label>
+        <div class="checkbox-wrapper">
+          <div class="checkbox-group">
+            <input type="checkbox" id="consent" [(ngModel)]="teamData.consent">
+            <label for="consent" class="consent-label">да</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="row">
+          <div class="field">
+            <label class="section-label">* Страна</label>
+            <input type="text" [(ngModel)]="teamData.country" placeholder="Страна">
+          </div>
+          <div class="field">
+            <label class="section-label">* Город</label>
+            <input type="text" [(ngModel)]="teamData.city" placeholder="Город">
+          </div>
+        </div>
+
+        <label class="section-label">*Полное наименование учебного заведения</label>
+        <input type="text" [(ngModel)]="teamData.institution" placeholder="Университет / Колледж">
+
+        <label class="section-label">*Название команды </label>
+        <input type="text" [(ngModel)]="teamData.teamName" placeholder="Введите название вашей команды">
+      </div>
+
+      <hr class="separator">
+
+      <div *ngFor="let member of teamData.members; let i = index" class="member-section">
+        <h3 class="member-title">Участник №{{i + 1}} {{ i === 0 ? '(Капитан команды)' : '' }}</h3>
+        
+        <div class="field-group">
+          <label class="section-label">* ФИО (полностью)</label>
+          <input type="text" [(ngModel)]="member.fio">
+
+          <label class="section-label">* Факультет / образовательный институт</label>
+          <input type="text" [(ngModel)]="member.faculty">
+
+          <div class="row">
+            <div class="field">
+              <label class="section-label">* Курс обучения</label>
+              <input type="text" [(ngModel)]="member.course">
+            </div>
+            <div class="field">
+              <label class="section-label">* Номер группы</label>
+              <input type="text" [(ngModel)]="member.group">
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="i === 0" class="captain-contacts">
+          <label class="section-label">* Контактный номер телефона капитана</label>
+          <input type="text" [(ngModel)]="teamData.phone">
+          <label class="section-label">* Электронная почта капитана</label>
+          <input type="email" [(ngModel)]="teamData.email">
+          <label class="section-label">* Ссылка ВК капитана</label>
+          <input type="text" [(ngModel)]="teamData.vkLink">
+          <hr class="separator">
+        </div>
+      </div>
+
+      <div class="member-section mentor-section">
+        <h3 class="member-title">Данные сопровождающего </h3>
+        
+        <label class="section-label">* ФИО сопровождающего</label>
+        <input type="text" [(ngModel)]="teamData.mentor.fio">
+
+        <label class="section-label">* Должность</label>
+        <input type="text" [(ngModel)]="teamData.mentor.jobTitle">
+
+        <label class="section-label">* Название организации / кафедры</label>
+        <input type="text" [(ngModel)]="teamData.mentor.organization">
+
+        <label class="section-label">* Электронная почта сопровождающего</label>
+        <input type="email" [(ngModel)]="teamData.mentor.email">
+      </div>
+
+      <button class="btn-submit" (click)="sendRegistration()">ОТПРАВИТЬ</button>
+    </div>
+  </div>
+</div> <router-outlet></router-outlet>

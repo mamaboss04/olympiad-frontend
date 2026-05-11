@@ -1,0 +1,63 @@
+<div style="padding: 20px; font-family: sans-serif; background-color: #f4f7f6; min-height: 100vh;">
+  <h2 style="text-align: center; color: #333; margin-bottom: 30px;">
+    Панель администратора: Полный список регистраций
+  </h2>
+  
+  <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+    <thead>
+      <tr style="background-color: #2c3e50; color: white; text-align: left;">
+        <th style="padding: 15px; border: 1px solid #34495e;">ВУЗ / Локация</th>
+        <th style="padding: 15px; border: 1px solid #34495e;">Команда и Контакты</th>
+        <th style="padding: 15px; border: 1px solid #34495e;">Участники (5 человек)</th>
+        <th style="padding: 15px; border: 1px solid #34495e;">Сопровождающий (Ментор)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let team of teams" style="border-bottom: 1px solid #eee;">
+        
+        <td style="padding: 15px; border: 1px solid #dee2e6; vertical-align: top;">
+          <strong style="font-size: 1.1em; color: #2c3e50;">{{ team.institution }}</strong><br>
+          <span style="color: #666; display: inline-block; margin-top: 5px;">📍 {{ team.city }}, {{ team.country }}</span>
+        </td>
+
+        <td style="padding: 15px; border: 1px solid #dee2e6; vertical-align: top;">
+          <div style="font-weight: bold; color: #007bff; font-size: 1.1em; margin-bottom: 8px;">
+            «{{ team.teamName }}»
+          </div>
+          <div style="font-size: 0.9em; line-height: 1.5;">
+            <strong>Тел:</strong> {{ team.phone }}<br>
+            <strong>Email:</strong> {{ team.email }}<br>
+            <a [href]="team.vkLink" target="_blank" style="color: #4a69bd; text-decoration: none; font-weight: bold;">
+              🔗 Профиль ВК
+            </a>
+          </div>
+        </td>
+
+        <td style="padding: 15px; border: 1px solid #dee2e6; vertical-align: top;">
+          <div *ngFor="let member of team.members; let i = index" style="margin-bottom: 12px; border-bottom: 1px solid #f9f9f9; padding-bottom: 5px;">
+            <div style="font-weight: bold;">{{ i + 1 }}. {{ member.fio }}</div>
+            <div style="font-size: 0.85em; color: #555; margin-left: 15px;">
+              Университет/Факультет: {{ member.faculty }}<br>
+              <strong>{{ member.course }} курс</strong>, группа: <strong>{{ member.group }}</strong>
+            </div>
+          </div>
+        </td>
+
+        <td style="padding: 15px; border: 1px solid #dee2e6; vertical-align: top; background-color: #fafafa;">
+          <div *ngIf="team.mentor && team.mentor.fio">
+            <strong style="color: #e67e22; font-size: 1.05em;">{{ team.mentor.fio }}</strong><br>
+            <div style="font-size: 0.9em; margin-top: 8px; line-height: 1.4;">
+              <strong>Должность:</strong> {{ team.mentor.jobTitle }}<br>
+              <strong>Организация:</strong> {{ team.mentor.organization }}<br>
+              <strong>Email:</strong> <span style="color: #2980b9;">{{ team.mentor.email }}</span>
+            </div>
+          </div>
+          <div *ngIf="!team.mentor || !team.mentor.fio" style="color: #999; font-style: italic; text-align: center; margin-top: 20px;">
+            Данные ментора отсутствуют
+          </div>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
